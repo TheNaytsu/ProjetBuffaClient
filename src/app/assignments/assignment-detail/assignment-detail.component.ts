@@ -74,8 +74,8 @@ export class AssignmentDetailComponent implements OnInit {
     this.router.navigate(['/assignment', this.assignmentTransmis?.id, 'edit'],
                         {
                           queryParams: {
-                            nom:'Buffa',
-                            prenom:'Michel'
+                            nom:'Soca',
+                            prenom:'Yann'
                         },
                           fragment:'edit'
                       });
