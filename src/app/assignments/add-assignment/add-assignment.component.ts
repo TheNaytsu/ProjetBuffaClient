@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import {stringify} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-add-assignment',
@@ -13,6 +14,8 @@ export class AddAssignmentComponent implements OnInit {
   // associées au champs input du formulaire
   nomDevoir = "";
   dateDeRendu!:Date;
+  nomAuteur ="";
+  noterecu =0;
 
   constructor(private assignmentService:AssignmentsService,
     private router:Router) { }
@@ -23,12 +26,14 @@ export class AddAssignmentComponent implements OnInit {
   onSubmit() {
     console.log("NOM = " + this.nomDevoir);
     console.log("DATE = " + this.dateDeRendu);
+    console.log("DATE = " + this.nomAuteur);
 
     const newAssignment = new Assignment();
-    newAssignment.id = Math.round(Math.random()*100000);
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.rendu = false;
+    newAssignment.auteur=this.nomAuteur;
+    newAssignment.note = this.noterecu;
 
     this.assignmentService.addAssignment(newAssignment)
     .subscribe(reponse => {

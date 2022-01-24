@@ -23,6 +23,7 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 const routes:Routes = [
   {
@@ -56,15 +57,15 @@ const routes:Routes = [
     AddAssignmentComponent,
     EditAssignmentComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule, MatIconModule, MatDividerModule,
-    FormsModule, MatInputModule, MatDatepickerModule,
-    MatNativeDateModule, MatListModule, MatCardModule,
-    MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-    RouterModule.forRoot(routes)
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule, MatIconModule, MatDividerModule,
+        FormsModule, MatInputModule, MatDatepickerModule,
+        MatNativeDateModule, MatListModule, MatCardModule,
+        MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
+        RouterModule.forRoot(routes), MatButtonToggleModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

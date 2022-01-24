@@ -29,14 +29,9 @@ export class AppComponent {
   }
 
   remplirBD() {
-    //this.assignmentsService.peuplerBD();
-
-    this.assignmentsService.peuplerBDAvecForkJoin().subscribe(() => {
-      console.log('LA BASE EST ENTIEREMENT REMPLIE AVEC LES DONNEES DE TEST');
-
       // replaceUrl = true = force le refresh, même si
       // on est déjà sur la page d’accueil
       this.router.navigate(['/home'], { replaceUrl: true });
-    });
+    }
   }
-}
+

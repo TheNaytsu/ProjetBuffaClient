@@ -18,9 +18,11 @@
  }
 
  .ajouterBtn {
-   align-self: flex-end;
+   align-self: center;
  }
-
+.filtrer {
+  align-self: flex-end;
+}
  .pagination {
    width:500px;
   display:flex;

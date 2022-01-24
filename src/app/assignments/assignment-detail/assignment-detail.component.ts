@@ -28,12 +28,10 @@ export class AssignmentDetailComponent implements OnInit {
     // le + force la conversion de string à number
     const id:number = +this.route.snapshot.params['id'];
     console.log("ID = " + id);
-
     this.assignmentService.getAssignment(id)
     .subscribe(assignment => {
-      // on utilise this.assignmentTransmis puisque c'est la propriété
-      // utilisée dans le template HTML
       this.assignmentTransmis = assignment;
+      console.log(this.assignmentTransmis)
     })
 
   }
@@ -83,5 +81,8 @@ export class AssignmentDetailComponent implements OnInit {
 
   isAdmin() {
     return this.authService.loggedIn;
+  }
+  photomatiere(){
+
   }
 }

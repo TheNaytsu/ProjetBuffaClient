@@ -14,20 +14,22 @@ export class AssignmentsComponent implements OnInit {
   page: number = 1;
   limit: number = 10;
   totalDocs: number = 0;
+  filtrerR : String = "lesdeux";
   totalPages: number = 0;
   hasPrevPage: boolean = false;
   prevPage: number = 0;
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
-  constructor(private assignmentService: AssignmentsService) {}
+  constructor(private assignmentService: AssignmentsService) {
+  }
 
   ngOnInit(): void {
     this.getAssignments();
   }
 
   getAssignments() {
-    this.assignmentService.getAssignmentsPagine(this.page, this.limit).subscribe((data) => {
+    this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.filtrerR).subscribe((data) => {
       // le tableau des assignments est maintenant ici....
       this.assignments = data.docs;
       this.page = data.page;
@@ -69,4 +71,5 @@ export class AssignmentsComponent implements OnInit {
   changeLimit() {
     this.getAssignments();
   }
+
 }

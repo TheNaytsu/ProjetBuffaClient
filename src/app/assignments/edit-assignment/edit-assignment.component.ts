@@ -31,9 +31,9 @@ export class EditAssignmentComponent implements OnInit {
 
   getAssignment() {
     // récupère l'id dans l'URL
-    const id = +this.route.snapshot.params['id'];
+    const _id = this.route.snapshot.params['_id'];
 
-    this.assignmentService.getAssignment(id)
+    this.assignmentService.getAssignment(_id)
     .subscribe(assignment => {
       // Pour que la "vue" affiche les informations
       // de l'assignment qu'on édite....

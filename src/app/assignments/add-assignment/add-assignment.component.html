@@ -3,7 +3,10 @@
       (submit)="onSubmit(); assignmentForm.reset();">
 
   <mat-form-field>
-    <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
+  <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
+</mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="nomAuteur" name="nom" placeholder="Nom du devoir">
   </mat-form-field>
 
   <mat-form-field appearance="fill">

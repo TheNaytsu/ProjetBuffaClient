@@ -2,6 +2,9 @@ export class Assignment {
   nom!:string;
   dateDeRendu!:Date;
   rendu!:boolean;
-  id?:number;
-  _id?:string;
+  auteur!:string;
+  note!:number;
+  remarques!:string;
+  matiere!:any;
+  id!:number;
 }

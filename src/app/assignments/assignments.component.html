@@ -1,4 +1,14 @@
 <main class="container">
+  <br>
+  <div class="filtrer" >
+
+    <p>Filtres : <select [(ngModel)]="filtrerR" (ngModelChange)="getAssignments()">
+      <option value="lesdeux">Les deux</option>
+      <option value="rendu">Rendu seulement</option>
+      <option value="nonrendu">Non rendu seulement</option>
+    </select>
+    </p>
+  </div>
   <div class="ajouterBtn">
     <a routerLink="/add">
       <button mat-flat-button color="accent">

@@ -3,3 +3,7 @@
   justify-content: space-between;
   align-items: flex-end;
 }
+.logo{
+  height:100px;
+  width:100px;
+}
