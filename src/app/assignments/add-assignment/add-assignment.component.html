@@ -6,7 +6,7 @@
   <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
 </mat-form-field>
   <mat-form-field>
-    <input matInput [(ngModel)]="nomAuteur" name="nom" placeholder="Nom du devoir">
+    <input matInput [(ngModel)]="nomAuteur" name="nom" placeholder="Nom de l'auteur">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -15,6 +15,22 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Note"
+           [(ngModel)]="noteRecu" name="assignment-note">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Remarques"
+           [(ngModel)]="remarquesRecu" name="assignment-remarques">
+  </mat-form-field>
+  <div class="matiere">
+    <p>Matière : <select [(ngModel)]="matiereAssignment" name="assignment-matiere">
+      <option value='Base de données'>Base de données</option>
+      <option value='Technologies Web'>Technologies Web</option>
+      <option value='Grails'>Grails</option>
+    </select>
+    </p>
+  </div>
 
   <button mat-stroked-button color="primary">
     Ajouter un devoir

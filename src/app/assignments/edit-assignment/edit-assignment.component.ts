@@ -13,6 +13,10 @@ export class EditAssignmentComponent implements OnInit {
   // champs du formulaire
   nomAssignment?:string;
   dateDeRendu?:Date;
+  noteAssignment?:number;
+  auteurAssignment?:string;
+  remarquesAssignment?:string;
+  matiereAssignment?:any;
 
   constructor(private route:ActivatedRoute,
               private router:Router,
@@ -31,9 +35,8 @@ export class EditAssignmentComponent implements OnInit {
 
   getAssignment() {
     // récupère l'id dans l'URL
-    const _id = this.route.snapshot.params['_id'];
-
-    this.assignmentService.getAssignment(_id)
+    const id:number = +this.route.snapshot.params['id'];
+    this.assignmentService.getAssignment(id)
     .subscribe(assignment => {
       // Pour que la "vue" affiche les informations
       // de l'assignment qu'on édite....
@@ -41,6 +44,10 @@ export class EditAssignmentComponent implements OnInit {
       // pré-remplit le formulaire dès l'affichage
       this.nomAssignment = assignment?.nom;
       this.dateDeRendu = assignment?.dateDeRendu;
+      this.noteAssignment = assignment?.note;
+      this.auteurAssignment = assignment?.auteur;
+      this.remarquesAssignment = assignment?.remarques;
+      this.matiereAssignment = assignment?.matiere.nom;
     })
   }
 
@@ -50,9 +57,36 @@ export class EditAssignmentComponent implements OnInit {
     if (this.nomAssignment) {
       this.assignment.nom = this.nomAssignment;
     }
-
     if (this.dateDeRendu) {
       this.assignment.dateDeRendu = this.dateDeRendu;
+    }
+    if (this.noteAssignment) {
+      if(this.noteAssignment <=20 && this.noteAssignment >=0) {
+        this.assignment.note = this.noteAssignment;
+      }
+    }
+    if (this.auteurAssignment) {
+      this.assignment.auteur = this.auteurAssignment;
+    }
+    if (this.remarquesAssignment) {
+      this.assignment.remarques = this.remarquesAssignment;
+    }
+    if (this.matiereAssignment) {
+      if(this.matiereAssignment == "Base de données"){
+        this.assignment.matiere.nom = this.matiereAssignment;
+        this.assignment.matiere.prof ="assets/ProfBDD.jpg";
+        this.assignment.matiere.imagematiere = "assets/BDD.png";
+      }
+      else if(this.matiereAssignment == "Technologies Web"){
+        this.assignment.matiere.nom = this.matiereAssignment;
+        this.assignment.matiere.prof ="assets/Buffa.jpg";
+        this.assignment.matiere.imagematiere = "assets/angular.png";
+      }
+      else{
+        this.assignment.matiere.nom = this.matiereAssignment;
+        this.assignment.matiere.prof ="assets/profGrails.jpg";
+        this.assignment.matiere.imagematiere = "assets/Grails.png";
+      }
     }
     this.assignmentService
       .updateAssignment(this.assignment)

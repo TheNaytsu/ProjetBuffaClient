@@ -2,17 +2,18 @@
   <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
   <p>écrit par {{assignmentTransmis.auteur}}</p>
   <mat-card-subtitle>{{assignmentTransmis.dateDeRendu| date}}</mat-card-subtitle>
-  Note : {{assignmentTransmis.note}}/20<br>
+  <span *ngIf="assignmentTransmis.note != null"> Note : {{assignmentTransmis.note}}/20<br></span>
   Remarques : {{assignmentTransmis.remarques}}
   <br>
   <br>
   <div>
     Matière : {{assignmentTransmis.matiere.nom}}
     <br>
-    <img *ngIf="assignmentTransmis.matiere.imagematiere == 'imagematiere3'" class="logo" src="assets/Grails.png">
+    <img class="logo" src={{assignmentTransmis.matiere.imagematiere}}>
+    <img class="logo" src={{assignmentTransmis.matiere.prof}}>
   </div>
   <div class="bottom">
-    <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+    <mat-checkbox *ngIf="!assignmentTransmis.rendu && assignmentTransmis.note" (click)="onAssignmentRendu()">
       Rendu
     </mat-checkbox>
 

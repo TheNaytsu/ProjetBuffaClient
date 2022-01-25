@@ -8,7 +8,7 @@ import { Assignment } from '../assignment.model';
 @Component({
   selector: 'app-assignment-detail',
   templateUrl: './assignment-detail.component.html',
-  styleUrls: ['./assignment-detail.component.css']
+  styleUrls: ['./assignment-detail.component.css'],
 })
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?:Assignment;
@@ -31,21 +31,20 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentService.getAssignment(id)
     .subscribe(assignment => {
       this.assignmentTransmis = assignment;
-      console.log(this.assignmentTransmis)
+      console.log(assignment)
     })
 
   }
   onAssignmentRendu() {
     this.assignmentTransmis!.rendu = true;
-
-    if(this.assignmentTransmis) {
+    if (this.assignmentTransmis) {
       this.assignmentService.updateAssignment(this.assignmentTransmis)
-      .subscribe(reponse => {
-        console.log(reponse.message);
-        // on est dans le subscribe, on est sur que la base de données a été
-        // mise à jour....
-        this.router.navigate(["/home"]);
-      })
+        .subscribe(reponse => {
+          console.log(reponse.message);
+          // on est dans le subscribe, on est sur que la base de données a été
+          // mise à jour....
+          this.router.navigate(["/home"]);
+        })
       // PAS BON SI ICI car on n'a pas la garantie que les données ont été updatées
       // this.router.navigate(["/home"]);
     }
