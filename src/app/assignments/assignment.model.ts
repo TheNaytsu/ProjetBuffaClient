@@ -1,3 +1,4 @@
+import {Matiere} from 'src/app/shared/matiere'
 export class Assignment {
   nom!:string;
   dateDeRendu!:Date;
@@ -5,6 +6,6 @@ export class Assignment {
   auteur!:string;
   note!:number;
   remarques!:string;
-  matiere!:any;
+  matiere!:Matiere;
   id!:number;
 }

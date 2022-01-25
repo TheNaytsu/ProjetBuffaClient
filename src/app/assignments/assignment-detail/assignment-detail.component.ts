@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
+import { Matiere } from 'src/app/shared/matiere';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -12,7 +13,6 @@ import { Assignment } from '../assignment.model';
 })
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?:Assignment;
-
   constructor(private assignmentService:AssignmentsService,
               private route:ActivatedRoute,
               private router:Router,
@@ -80,8 +80,5 @@ export class AssignmentDetailComponent implements OnInit {
 
   isAdmin() {
     return this.authService.loggedIn;
-  }
-  photomatiere(){
-
   }
 }

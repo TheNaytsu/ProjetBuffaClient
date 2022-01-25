@@ -27,11 +27,5 @@ export class AppComponent {
       this.router.navigate(['/home']);
     }
   }
-
-  remplirBD() {
-      // replaceUrl = true = force le refresh, même si
-      // on est déjà sur la page d’accueil
-      this.router.navigate(['/home'], { replaceUrl: true });
-    }
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
-import {stringify} from "@angular/compiler/src/util";
+import { Matiere } from 'src/app/shared/matiere';
 
 @Component({
   selector: 'app-add-assignment',
@@ -36,13 +36,27 @@ export class AddAssignmentComponent implements OnInit {
       newAssignment.note = this.noteRecu;
     }
     newAssignment.remarques = this.remarquesRecu;
-
+    newAssignment.matiere = new Matiere;
+  if (this.matiereAssignment == "Base de données") {
+    newAssignment.matiere.nom = this.matiereAssignment;
+    newAssignment.matiere.prof = "assets/ProfBDD.jpg";
+    newAssignment.matiere.imagematiere = "assets/BDD.png";
+  } else if (this.matiereAssignment == "Technologies Web") {
+    newAssignment.matiere.nom = this.matiereAssignment;
+    newAssignment.matiere.prof = "assets/Buffa.jpg";
+    newAssignment.matiere.imagematiere = "assets/angular.png";
+  } else {
+    newAssignment.matiere.nom = this.matiereAssignment;
+    newAssignment.matiere.prof = "assets/profGrails.jpg";
+    newAssignment.matiere.imagematiere = "assets/Grails.png";
+  }
     console.log("ID = " + newAssignment.id);
     console.log("NOM = " + newAssignment.nom);
     console.log("DATE = " + newAssignment.dateDeRendu);
     console.log("AUTEUR = " + newAssignment.auteur);
     console.log("REMARQUES = " + newAssignment.remarques);
     console.log("NOTE = " + newAssignment.note);
+    console.log("Matiere = " + newAssignment.matiere);
 this.assignmentService.addAssignment(newAssignment)
 .subscribe(reponse => {
   console.log(reponse.message);

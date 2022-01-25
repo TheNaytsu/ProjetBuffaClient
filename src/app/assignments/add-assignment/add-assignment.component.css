@@ -3,3 +3,6 @@
   flex-direction: column;
   margin:5px;
 }
+.matiere{
+  align-self:center;
+}
