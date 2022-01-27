@@ -14,10 +14,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MyserviceService} from './myservice.service'
+import {MatSortModule} from '@angular/material/sort';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -61,12 +65,12 @@ const routes:Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         MatButtonModule, MatIconModule, MatDividerModule,
-        FormsModule, MatInputModule, MatDatepickerModule,
+        FormsModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule,
         MatNativeDateModule, MatListModule, MatCardModule,
         MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-        RouterModule.forRoot(routes), MatButtonToggleModule
+        RouterModule.forRoot(routes), MatButtonToggleModule,MatTableModule,MatPaginatorModule,MatSortModule
     ],
-  providers: [],
+  providers: [MyserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
