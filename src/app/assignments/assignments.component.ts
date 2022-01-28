@@ -34,7 +34,6 @@ export class AssignmentsComponent implements OnInit {
   nextPage: number = 0;
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu','detail'];
   champs: string = '';
-  message = "Vous n'etes pas connecté";
   connecter = false;
 
 
@@ -73,7 +72,6 @@ export class AssignmentsComponent implements OnInit {
     return a.rendu ? 'green' : 'red';
   }
 
-  // pagination
   premierePage() {
     this.page = 1;
     this.getAssignments();
@@ -94,9 +92,6 @@ export class AssignmentsComponent implements OnInit {
       this.getAssignments();
   }
 
-  changeLimit() {
-    this.getAssignments();
-  }
   paginationChange(pe:PageEvent){
     this.page = pe.pageIndex+1
     this.limit =pe.pageSize

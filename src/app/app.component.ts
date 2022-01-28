@@ -18,15 +18,5 @@ export class AppComponent {
     private assignmentsService: AssignmentsService
   ) {}
 
-  login() {
-    if (!this.authService.loggedIn) {
-      console.log("Je n'étais pas connecté, je suis maintenant loggé");
-      this.authService.logIn();
-    } else {
-      console.log("J'étais  connecté, je suis maintenant déloggé");
-      this.authService.logOut();
-      this.router.navigate(['/home']);
-    }
-  }
   }
 

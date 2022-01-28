@@ -1,8 +1,7 @@
-<form ngForm class="form"
-      #assignmentForm
-      (submit)="onSubmit(); assignmentForm.reset();">
+<form *ngIf="connecter" ngForm class="form"
+#assignmentForm (submit)="onSubmit(); assignmentForm.reset();">
 
-  <mat-form-field>
+<!--  <mat-form-field>
   <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
 </mat-form-field>
   <mat-form-field>
@@ -35,4 +34,60 @@
   <button mat-stroked-button color="primary">
     Ajouter un devoir
   </button>
+
+-->
+<mat-stepper [linear]="isLinear"  #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Nom du devoir et nom de l'auteur</ng-template>
+      <mat-form-field>
+        <input matInput formControlName="nomDevoir"  placeholder="Nom du devoir">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput formControlName="nomAuteur" placeholder="Nom de l'auteur">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Date de rendu">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="picker" formControlName="dateDeRendu" placeholder="Date de rendu">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" label="Matière">
+    <form [formGroup]="thirdFormGroup">
+      <div class="matiere">
+        <p>Matière : <select formControlName="matiere">
+          <option value='Base de données'>Base de données</option>
+          <option value='Technologies Web'>Technologies Web</option>
+          <option value='Grails'>Grails</option>
+        </select>
+        </p>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button >Soumettre</button>
+    </div>
+  </mat-step>
+</mat-stepper>
 </form>

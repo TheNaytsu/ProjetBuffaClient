@@ -18,12 +18,6 @@ export class AssignmentsService {
   url = "http://localhost:8010/api/assignments";
   //url = "https://projetbuffaserv.herokuapp.com/api/assignments";
 
-  getAssignments():Observable<Assignment[]> {
-    // return of(this.assignments);
-
-    return this.http.get<Assignment[]>(this.url);
-  }
-
   getAssignmentsPagine(page:number, limit:number, filtrerR:String, champs:string):Observable<any> {
     if(filtrerR == "nonrendu") {
       return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&filtrerR=${filtrerR}&champs=${champs}`)

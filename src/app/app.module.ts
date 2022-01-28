@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
@@ -79,7 +80,7 @@ const routes:Routes = [
         FormsModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule,
         MatNativeDateModule, MatListModule, MatCardModule,
         MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
-        RouterModule.forRoot(routes), MatButtonToggleModule,MatTableModule,MatPaginatorModule,MatSortModule
+        RouterModule.forRoot(routes), MatButtonToggleModule,MatTableModule,MatPaginatorModule,MatSortModule,MatStepperModule
     ],
   providers: [],
   bootstrap: [AppComponent]
