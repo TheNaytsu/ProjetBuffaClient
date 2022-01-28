@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
   }
   //url = "http://localhost:8010/api
-  url ="https://projetbuffaserv.herokuapp.com/api"
+  url ="https://projetbuffaserv.herokuapp.com/api/auth"
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name:"",
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     })
   }
   submit(): void{
-    this.http.post(this.url+'/auth/register', this.form.getRawValue())
+    this.http.post(this.url+'/register', this.form.getRawValue())
       .subscribe(() =>{
         this.router.navigate(['/login'])
       });
