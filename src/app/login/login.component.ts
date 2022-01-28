@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) { }
 
+  //url = "http://localhost:8010/api
+  url ="https://projetbuffaserv.herokuapp.com/api"
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       email:"",
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
     submit(): void{
-    this.http.post("http://localhost:8010/api/auth/login",this.form.getRawValue(),{
+    this.http.post(this.url+"/auth/login",this.form.getRawValue(),{
       withCredentials: true})
       .subscribe(() =>
       this.router.navigate(['/']));

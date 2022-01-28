@@ -43,9 +43,11 @@ export class AssignmentsComponent implements OnInit {
   ) {
 
   }
+  //url = "http://localhost:8010/api
+  url ="https://projetbuffaserv.herokuapp.com/api"
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8010/api/auth/user',{withCredentials: true}).subscribe(
+    this.http.get(this.url+'/auth/user',{withCredentials: true}).subscribe(
       res =>{
         Emitters.authEmitter.emit(true);
         this.connecter = true;

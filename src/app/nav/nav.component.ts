@@ -14,7 +14,8 @@ export class NavComponent implements OnInit {
   constructor(private http: HttpClient) {
 
   }
-
+  //url = "http://localhost:8010/api
+  url ="https://projetbuffaserv.herokuapp.com/api"
   ngOnInit(): void {
     Emitters.authEmitter.subscribe(
       (auth: boolean) =>{
@@ -23,7 +24,7 @@ export class NavComponent implements OnInit {
 
   }
   logout(): void{
-    this.http.post('http://localhost:8010/api/auth/logout',{},{withCredentials:true})
+    this.http.post(this.url+"/auth/logout",{},{withCredentials:true})
       .subscribe(() => this.connecter = false)
   }
 
