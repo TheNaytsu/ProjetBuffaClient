@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a routerLink="/" class="navbar-brand">Accueil</a>
+    <div>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="!connecter">
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link">Se Connecter</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/register" class="nav-link">S'inscrire</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="connecter">
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link" (click)="logout()">Se Déconnecter</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

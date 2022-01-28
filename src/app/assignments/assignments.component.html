@@ -1,7 +1,7 @@
-<main class="container">
+<span *ngIf="!connecter">{{message}}</span>
+<main *ngIf="connecter" class="container">
   <br>
   <div class="filtrer" >
-
     <p>Filtres : <select [(ngModel)]="filtrerR" (ngModelChange)="getAssignments()">
       <option value="lesdeux">Les deux</option>
       <option value="rendu">Rendu seulement</option>
@@ -17,65 +17,18 @@
     </a>
   </div>
 
- <h2>Liste des assignments :</h2>
-  Nb assignments par page :
-  <input type=range min=2 max=100 value=10 [(ngModel)]="limit" (change)="getAssignments()"> {{limit}}
-<div class="pagination">
-  <button mat-stroked-button color="primary"
-          (click)="premierePage()"
-          [disabled]="page===1"
-  >Première page</button>
-  &nbsp;
-  <button mat-stroked-button color="primary"
-          (click)="pagePrecedente()"
-          [disabled]="!hasPrevPage"
-  >Page précédente</button>
-  &nbsp;
-  <button mat-stroked-button color="primary"
-          (click)="pageSuivante()"
-          [disabled]="!hasNextPage"
-          >Page suivante</button>
-  &nbsp;
-  <button mat-stroked-button color="primary"
-          (click)="dernierePage()"
-          [disabled]="page===totalPages"
-  >Dernière page</button>
-</div>
-  <!--<mat-list *ngFor="let assignment of assignments">
-    <nav>
-      <a routerLink="/assignment/{{assignment.id}}">
-        <h3 mat-subheader>Date de rendu : {{assignment.dateDeRendu | date}}</h3>
-        <mat-list-item>
-          <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
-            {{assignment.nom}} a été rendu par l'élève.
-          </p>
-
-          <ng-template #nonsoumis>
-            <p>{{assignment.nom}} non rendu.</p>
-          </ng-template>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </a>
-    </nav>
-  </mat-list>
-  -->
   <mat-form-field appearance="standard">
     <mat-label>Recherche</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. at velit eu est" #input>
+    <input matInput [(ngModel)]="champs" (keyup)="getAssignments()" placeholder="Ex. at velit eu est" #input>
   </mat-form-field>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="assignments" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let assignment"> {{assignment.id}}
       </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="nom">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
       <td mat-cell *matCellDef="let assignment"> {{assignment.nom}}
@@ -84,7 +37,6 @@
         </ng-template></td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="dateDeRendu">
       <th mat-header-cell *matHeaderCellDef> Date </th>
       <td mat-cell *matCellDef="let assignment"> {{assignment.dateDeRendu}} </td>
@@ -107,5 +59,5 @@
       <td class="mat-cell" colspan="4">Aucun Assignment correspondant à la recherche"{{input.value}}"</td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selectionner le nombre d'assignments"></mat-paginator>
+  <mat-paginator [length]="totalDocs" [pageSize]="limit" (page)="paginationChange($event)" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selectionner le nombre d'assignments"></mat-paginator>
 </main>

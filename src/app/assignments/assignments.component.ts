@@ -1,8 +1,9 @@
-import { Component, OnInit,AfterViewInit,ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import {PageEvent} from "@angular/material/paginator";
+import {HttpClient} from "@angular/common/http";
+import {Emitters} from "../emitters/emitters";
 
 export interface PeriodicElement {
   nom: string;
@@ -21,7 +22,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css'],
 })
-export class AssignmentsComponent implements OnInit, AfterViewInit {
+export class AssignmentsComponent implements OnInit {
   assignments: Assignment[] = [];
   // pour la pagination
   page: number = 1;
@@ -29,40 +30,42 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   totalDocs: number = 0;
   filtrerR : String = "lesdeux";
   totalPages: number = 0;
-  hasPrevPage: boolean = false;
   prevPage: number = 0;
-  hasNextPage: boolean = false;
   nextPage: number = 0;
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu','detail'];
-  dataSource: MatTableDataSource<Assignment>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  champs: string = '';
+  message = "Vous n'etes pas connecté";
+  connecter = false;
 
-  constructor(private assignmentService: AssignmentsService) {
-    const data = this.assignments
-    this.dataSource = new MatTableDataSource(data);
+
+  constructor(
+    private assignmentService: AssignmentsService,
+    private http: HttpClient
+  ) {
+
   }
 
   ngOnInit(): void {
-    this.getAssignments();
-  }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filterPredicate)
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.http.get('http://localhost:8010/api/auth/user',{withCredentials: true}).subscribe(
+      res =>{
+        Emitters.authEmitter.emit(true);
+        this.connecter = true;
+        this.getAssignments();
+      },
+      err=>{
+        Emitters.authEmitter.emit(false);
+        this.connecter = false;
+      }
+    );
   }
 
   getAssignments() {
-    this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.filtrerR).subscribe((data) => {
+    this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.filtrerR, this.champs).subscribe((data) => {
       this.assignments = data.docs;
-      this.dataSource = new MatTableDataSource(this.assignments);
+      this.page=data.page;
+      this.limit =data.limit;
+      this.totalPages=data.totalPages;
+      this.totalDocs=data.totalDocs;
     });
   }
 
@@ -93,6 +96,11 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   changeLimit() {
     this.getAssignments();
+  }
+  paginationChange(pe:PageEvent){
+    this.page = pe.pageIndex+1
+    this.limit =pe.pageSize
+    this.getAssignments()
   }
 
 }

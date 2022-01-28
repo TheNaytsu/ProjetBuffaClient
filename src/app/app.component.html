@@ -1,12 +1,7 @@
-<h1>
-  <nav>
-    <a routerLink="/home">
-      {{title}}
-    </a>
-  </nav>
-</h1>
+<app-nav></app-nav>
+<main class="form-signin">
+  <router-outlet></router-outlet>
+</main>
 
-<mat-slide-toggle (click)="login()">Login</mat-slide-toggle>
-<br>
 
-<router-outlet></router-outlet>
+

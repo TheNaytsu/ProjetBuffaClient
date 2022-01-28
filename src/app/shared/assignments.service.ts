@@ -24,15 +24,15 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.url);
   }
 
-  getAssignmentsPagine(page:number, limit:number, filtrerR:String):Observable<any> {
+  getAssignmentsPagine(page:number, limit:number, filtrerR:String, champs:string):Observable<any> {
     if(filtrerR == "nonrendu") {
-      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&filtrerR=${filtrerR}`)
+      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&filtrerR=${filtrerR}&champs=${champs}`)
     }
     else if(filtrerR=="rendu"){
-      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&filtrerR=${filtrerR}`);
+      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&filtrerR=${filtrerR}&champs=${champs}`);
     }
     else{
-      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}`);
+      return this.http.get<any>(`${this.url}?page=${page}&limit=${limit}&champs=${champs}`);
     }
   }
 

@@ -16,7 +16,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MyserviceService} from './myservice.service'
 import {MatSortModule} from '@angular/material/sort';
 
 import { AssignmentsComponent } from './assignments/assignments.component';
@@ -28,11 +27,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component';
 
 const routes:Routes = [
   {
     path:"",
     component: AssignmentsComponent
+  },
+  {
+    path: 'login', component : LoginComponent
+  },
+  {
+    path: 'register', component: RegisterComponent
   },
   {
     path:"home",
@@ -59,7 +67,10 @@ const routes:Routes = [
     RenduDirective,
     AssignmentDetailComponent,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    RegisterComponent,
+    LoginComponent,
+    NavComponent
   ],
     imports: [
         BrowserModule,
@@ -70,7 +81,7 @@ const routes:Routes = [
         MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
         RouterModule.forRoot(routes), MatButtonToggleModule,MatTableModule,MatPaginatorModule,MatSortModule
     ],
-  providers: [MyserviceService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
