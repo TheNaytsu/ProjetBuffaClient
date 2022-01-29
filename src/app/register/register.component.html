@@ -20,7 +20,7 @@
           #username="ngModel"
         />
         <div class="alert-danger" *ngIf="username.errors && f.submitted">
-          <div *ngIf="username.errors['required']">Nom d'utilisateur</div>
+          <div *ngIf="username.errors['required']">Enter un nom d'utilisateur</div>
           <div *ngIf="username.errors['minlength']">
             Le nom d'utilisateur doit posséder au moins 3 caractères
           </div>
@@ -41,9 +41,9 @@
           #email="ngModel"
         />
         <div class="alert-danger" *ngIf="email.errors && f.submitted">
-          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['required']">Entrer une email</div>
           <div *ngIf="email.errors['email']">
-            Email must be a valid email address
+            L'email n'est pas valide
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      Votre inscription est validé
     </div>
   </div>
 </div>
