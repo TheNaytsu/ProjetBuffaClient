@@ -1,4 +1,4 @@
-<main *ngIf="connecter" class="container">
+<main  *ngIf="isLoggedIn" class="container">
   <br>
   <div class="filtrer" >
     <p>Filtres : <select [(ngModel)]="filtrerR" (ngModelChange)="getAssignments()">
@@ -60,3 +60,13 @@
   </table>
   <mat-paginator [length]="totalDocs" [pageSize]="limit" (page)="paginationChange($event)" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Selectionner le nombre d'assignments"></mat-paginator>
 </main>
+  <div *ngIf="!isLoggedIn">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p style="text-align: center">Vous devez vous connecter pour accéder à l'application</p>
+  </div>
+
+

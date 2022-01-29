@@ -26,11 +26,11 @@ import { AssignmentDetailComponent } from './assignments/assignment-detail/assig
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
-import { AuthGuard } from './shared/auth.guard';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 const routes:Routes = [
   {
@@ -58,8 +58,7 @@ const routes:Routes = [
   {
     path:"assignment/:id/edit",
     component: EditAssignmentComponent,
-    canActivate : [AuthGuard]
-  }
+  },
 ];
 @NgModule({
   declarations: [
@@ -71,7 +70,7 @@ const routes:Routes = [
     EditAssignmentComponent,
     RegisterComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
   ],
     imports: [
         BrowserModule,
@@ -82,7 +81,7 @@ const routes:Routes = [
         MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
         RouterModule.forRoot(routes), MatButtonToggleModule,MatTableModule,MatPaginatorModule,MatSortModule,MatStepperModule
     ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

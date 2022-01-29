@@ -3,15 +3,16 @@
   <p>écrit par {{assignmentTransmis.auteur}}</p>
   <mat-card-subtitle>{{assignmentTransmis.dateDeRendu| date}}</mat-card-subtitle>
   <span *ngIf="assignmentTransmis.note != null"> Note : {{assignmentTransmis.note}}/20<br></span>
-  Remarques : {{assignmentTransmis.remarques}}
+  <span *ngIf="assignmentTransmis.remarques != null">Remarques : {{assignmentTransmis.remarques}}</span>
   <br>
   <br>
   <div>
     Matière : {{assignmentTransmis.matiere.nom}}
     <br>
+    <br>
     <img class="logo" src={{assignmentTransmis.matiere.imagematiere}}>
     <img class="logo" src={{assignmentTransmis.matiere.prof}}>
-  </div>
+  </div><br>
   <div class="bottom">
     <mat-checkbox *ngIf="!assignmentTransmis.rendu && assignmentTransmis.note" (click)="onAssignmentRendu()">
       Rendu

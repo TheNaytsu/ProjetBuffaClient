@@ -4,7 +4,6 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { Matiere } from 'src/app/shared/matiere';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Emitters} from "../../emitters/emitters";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -20,12 +19,10 @@ export class AddAssignmentComponent implements OnInit {
   nomAuteur ="";
   noteRecu =0;
   remarquesRecu ="";
-  matiereAssignment = "";
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
-  fourthFormGroup!: FormGroup;
   nomevent!: string;
   connecter = false;
 
@@ -37,16 +34,6 @@ export class AddAssignmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8010/api/auth/user',{withCredentials: true}).subscribe(
-      res =>{
-        Emitters.authEmitter.emit(true);
-        this.connecter = true;
-      },
-      err=>{
-        Emitters.authEmitter.emit(false);
-        this.connecter = false;
-      }
-    );
     this.firstFormGroup = this._formBuilder.group({
       nomDevoir: ["",Validators.required],
       nomAuteur: ["", Validators.required]

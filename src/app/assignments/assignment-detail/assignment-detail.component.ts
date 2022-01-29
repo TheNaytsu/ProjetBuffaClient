@@ -1,10 +1,8 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
-import { Matiere } from 'src/app/shared/matiere';
+import {TokenStorageService} from "../../_services/token-storage.service";
 
 @Component({
   selector: 'app-assignment-detail',
@@ -13,14 +11,16 @@ import { Matiere } from 'src/app/shared/matiere';
 })
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?:Assignment;
+  isLoggedIn = false;
   constructor(private assignmentService:AssignmentsService,
               private route:ActivatedRoute,
               private router:Router,
-              private authService:AuthService) { }
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     console.log("DANS COMPOSANT DETAIL")
     this.getAssignment();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
   }
 
   getAssignment() {
@@ -79,6 +79,11 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.authService.loggedIn;
+    var roles: string[] = [];
+    var isAdmin = false;
+    var user = this.tokenStorageService.getUser();
+    roles = user.roles;
+    isAdmin = roles.includes('ROLE_ADMIN');
+    return isAdmin
   }
 }

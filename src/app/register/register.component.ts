@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,23 +7,33 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  form!: FormGroup;
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
-  }
-  //url = "http://localhost:8010/api
-  url ="https://projetbuffaserv.herokuapp.com/api/auth"
+  form: any = {
+    username: null,
+    email: null,
+    password: null
+  };
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+
+  constructor(private authService: AuthService) { }
+
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      name:"",
-      email: "",
-      password: ""
-    })
-  }
-  submit(): void{
-    this.http.post(this.url+'/register', this.form.getRawValue())
-      .subscribe(() =>{
-        this.router.navigate(['/login'])
-      });
   }
 
+  onSubmit(): void {
+    const { username, email, password } = this.form;
+
+    this.authService.register(username, email, password).subscribe({
+      next: data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    });
+  }
 }

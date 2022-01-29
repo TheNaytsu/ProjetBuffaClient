@@ -1,8 +1,5 @@
-import { Component, NgModule } from '@angular/core';
-import { Router } from '@angular/router';
-import { AssignmentsService } from './shared/assignments.service';
-import { AuthService } from './shared/auth.service';
-
+import { Component } from '@angular/core';
+import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +7,39 @@ import { AuthService } from './shared/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Application de gestion des assignments';
+  //title = 'Application de gestion des assignments';
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  username?: string;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private assignmentsService: AssignmentsService
-  ) {}
+  constructor(private tokenStorageService: TokenStorageService) { }
 
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+
+      this.username = user.username;
+    }
   }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
+  }
+}
+
+
+
+
+
+
+
+
+
 

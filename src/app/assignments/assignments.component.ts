@@ -3,7 +3,7 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {PageEvent} from "@angular/material/paginator";
 import {HttpClient} from "@angular/common/http";
-import {Emitters} from "../emitters/emitters";
+import {TokenStorageService} from "../_services/token-storage.service";
 
 export interface PeriodicElement {
   nom: string;
@@ -34,30 +34,19 @@ export class AssignmentsComponent implements OnInit {
   nextPage: number = 0;
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu','detail'];
   champs: string = '';
-  connecter = false;
-
+  isLoggedIn = false;
 
   constructor(
     private assignmentService: AssignmentsService,
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenStorageService: TokenStorageService
   ) {
 
   }
-  //url = "http://localhost:8010/api
-  url ="https://projetbuffaserv.herokuapp.com/api"
 
   ngOnInit(): void {
-    this.http.get(this.url+'/auth/user',{withCredentials: true}).subscribe(
-      res =>{
-        Emitters.authEmitter.emit(true);
-        this.connecter = true;
-        this.getAssignments();
-      },
-      err=>{
-        Emitters.authEmitter.emit(false);
-        this.connecter = false;
-      }
-    );
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.getAssignments()
   }
 
   getAssignments() {
@@ -68,6 +57,7 @@ export class AssignmentsComponent implements OnInit {
       this.totalPages=data.totalPages;
       this.totalDocs=data.totalDocs;
     });
+
   }
 
   getColor(a: any) {

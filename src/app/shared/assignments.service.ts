@@ -15,7 +15,7 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  //url = "http://localhost:8010/api/assignments";
+  //url = "http://localhost:8080/api/assignments";
   url = "https://projetbuffaserv.herokuapp.com/api/assignments";
 
   getAssignmentsPagine(page:number, limit:number, filtrerR:String, champs:string):Observable<any> {

@@ -1,4 +1,4 @@
-<form *ngIf="connecter" ngForm class="form"
+<form ngForm class="form"
 #assignmentForm (submit)="onSubmit(); assignmentForm.reset();">
 
 <!--  <mat-form-field>
@@ -37,7 +37,7 @@
 
 -->
 <mat-stepper [linear]="isLinear"  #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+  <mat-step  [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Nom du devoir et nom de l'auteur</ng-template>
       <mat-form-field>

@@ -1,9 +1,70 @@
-<form [formGroup]="form" (submit)="submit()">
-  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<div class="col-md-12">
+  <div class="card card-container">
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="username.errors && f.submitted"
+        >
+          Le nom d'utilisateur est nécessaire
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted"
+        >
+          <div *ngIf="password.errors['required']">Le mot de passe est nécessaire</div>
+          <div *ngIf="password.errors['minlength']">
+            Le mot de passe doit au moins posséder 6 caractères
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">
+          Connexion
+        </button>
+      </div>
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Connexion échouée: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
 
-  <input formControlName="email" type="email" class="form-control" placeholder="name@example.com" required>
-
-  <input formControlName="password" type="password" class="form-control" placeholder="Password" required>
-  <br>
-  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-</form>
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Connecté en tant que {{ roles }}.
+    </div>
+  </div>
+</div>
