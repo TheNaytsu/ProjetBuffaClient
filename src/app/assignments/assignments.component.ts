@@ -7,7 +7,6 @@ import {TokenStorageService} from "../_services/token-storage.service";
 
 export interface PeriodicElement {
   nom: string;
-  id: number;
   dateDeRendu: Date;
   detail:any;
 
@@ -32,7 +31,7 @@ export class AssignmentsComponent implements OnInit {
   totalPages: number = 0;
   prevPage: number = 0;
   nextPage: number = 0;
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu','detail'];
+  displayedColumns: string[] = ['nom', 'dateDeRendu','detail'];
   champs: string = '';
   isLoggedIn = false;
 
