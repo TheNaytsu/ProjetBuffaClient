@@ -8,4 +8,5 @@ export class Assignment {
   remarques!:string;
   matiere!:Matiere;
   id!:number;
+  _id!:string
 }

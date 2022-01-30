@@ -31,7 +31,6 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentService.getAssignment(id)
     .subscribe(assignment => {
       this.assignmentTransmis = assignment;
-      console.log(assignment)
     })
 
   }

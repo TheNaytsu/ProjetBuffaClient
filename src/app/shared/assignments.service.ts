@@ -62,8 +62,7 @@ export class AssignmentsService {
     //this.assignments.splice(pos, 1);
 
     //return of(`Assignment ${assignment.nom} supprimé`);
-    console.log(assignment.id)
-    return this.http.delete(this.url + "/" + assignment.id);
+    return this.http.delete(this.url + "/" + assignment._id);
   }
 
   // version naive qui ne renvoie rien

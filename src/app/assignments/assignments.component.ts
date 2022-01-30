@@ -44,6 +44,7 @@ export class AssignmentsComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     this.getAssignments()
