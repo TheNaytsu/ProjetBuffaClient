@@ -18,7 +18,7 @@
 
   <mat-form-field appearance="standard">
     <mat-label>Recherche</mat-label>
-    <input matInput [(ngModel)]="champs" (keyup)="getAssignments()" placeholder="Ex. at velit eu est" #input>
+    <input matInput [(ngModel)]="champs" (keyup)="getChamps()" placeholder="Ex. at velit eu est. Veuillez respecter les majuscules dans les noms." #input >
   </mat-form-field>
   <table mat-table [dataSource]="assignments" class="mat-elevation-z8">
 

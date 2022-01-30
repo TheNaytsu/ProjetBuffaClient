@@ -5,16 +5,6 @@ import {PageEvent} from "@angular/material/paginator";
 import {HttpClient} from "@angular/common/http";
 import {TokenStorageService} from "../_services/token-storage.service";
 
-export interface PeriodicElement {
-  nom: string;
-  dateDeRendu: Date;
-  detail:any;
-
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-
-];
 
 @Component({
   selector: 'app-assignments',
@@ -27,11 +17,11 @@ export class AssignmentsComponent implements OnInit {
   page: number = 1;
   limit: number = 10;
   totalDocs: number = 0;
-  filtrerR : String = "lesdeux";
+  filtrerR: String = "lesdeux";
   totalPages: number = 0;
   prevPage: number = 0;
   nextPage: number = 0;
-  displayedColumns: string[] = ['nom', 'dateDeRendu','detail'];
+  displayedColumns: string[] = ['nom', 'dateDeRendu', 'detail'];
   champs: string = '';
   isLoggedIn = false;
 
@@ -52,10 +42,10 @@ export class AssignmentsComponent implements OnInit {
   getAssignments() {
     this.assignmentService.getAssignmentsPagine(this.page, this.limit, this.filtrerR, this.champs).subscribe((data) => {
       this.assignments = data.docs;
-      this.page=data.page;
-      this.limit =data.limit;
-      this.totalPages=data.totalPages;
-      this.totalDocs=data.totalDocs;
+      this.page = data.page;
+      this.limit = data.limit;
+      this.totalPages = data.totalPages;
+      this.totalDocs = data.totalDocs;
     });
 
   }
@@ -75,19 +65,24 @@ export class AssignmentsComponent implements OnInit {
   }
 
   pagePrecedente() {
-      this.page = this.prevPage;
-      this.getAssignments();
+    this.page = this.prevPage;
+    this.getAssignments();
   }
 
   pageSuivante() {
-      this.page = this.nextPage;
-      this.getAssignments();
+    this.page = this.nextPage;
+    this.getAssignments();
   }
 
-  paginationChange(pe:PageEvent){
-    this.page = pe.pageIndex+1
-    this.limit =pe.pageSize
+  paginationChange(pe: PageEvent) {
+    this.page = pe.pageIndex + 1
+    this.limit = pe.pageSize
+    this.getAssignments()
+    return pe
+  }
+
+  getChamps() {
+    this.page = 1;
     this.getAssignments()
   }
-
 }
