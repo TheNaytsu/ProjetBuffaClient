@@ -13,10 +13,11 @@ export class EditAssignmentComponent implements OnInit {
   // champs du formulaire
   nomAssignment?:string;
   dateDeRendu?:Date;
-  noteAssignment?:number;
+  noteAssignment!:number;
   auteurAssignment?:string;
   remarquesAssignment?:string;
   matiereAssignment?:any;
+  notealert = false;
 
   constructor(private route:ActivatedRoute,
               private router:Router,
@@ -44,7 +45,7 @@ export class EditAssignmentComponent implements OnInit {
       // pré-remplit le formulaire dès l'affichage
       this.nomAssignment = assignment?.nom;
       this.dateDeRendu = assignment?.dateDeRendu;
-      this.noteAssignment = assignment?.note;
+      this.noteAssignment = assignment!.note;
       this.auteurAssignment = assignment?.auteur;
       this.remarquesAssignment = assignment?.remarques;
       this.matiereAssignment = assignment?.matiere.nom;
@@ -97,6 +98,11 @@ export class EditAssignmentComponent implements OnInit {
         this.router.navigate(['/home']);
       });
 
-
+  }
+  note() {
+    console.log(this.noteAssignment)
+    if (0>this.noteAssignment|| this.noteAssignment>20) {
+      this.notealert = true;
+    }
   }
  }

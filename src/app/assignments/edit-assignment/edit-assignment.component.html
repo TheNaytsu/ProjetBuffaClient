@@ -14,9 +14,12 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Edition de la note"
-             [(ngModel)]="noteAssignment" name="assignment-note">
+      <input matInput placeholder="Edition de la note" [(ngModel)]="noteAssignment" (keyup)="note()" name="assignment-note">
     </mat-form-field>
+    <div class="alert" *ngIf="notealert">
+      <span class="closebtn"  onclick="this.parentElement.style.display='none';notealert =false;">&times;</span>
+      La note doit être comprise entre 0 et 20.
+    </div>
     <mat-form-field>
       <input matInput placeholder="Edition de l'auteur"
              [(ngModel)]="auteurAssignment" name="assignment-auteur">
