@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
+import {Observable} from 'rxjs';
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 
@@ -15,8 +15,8 @@ export class AssignmentsService {
   constructor(private loggingService:LoggingService,
               private http:HttpClient) { }
 
-  url = "http://localhost:8080/api/assignments";
-  //url = "https://projetbuffaserv.herokuapp.com/api/assignments";
+  //url = "http://localhost:8080/api/assignments";
+  url = "https://projetbuffaserv.herokuapp.com/api/assignments";
 
   getAssignmentsPagine(page:number, limit:number, filtrerR:String, champs:string):Observable<any> {
     if(filtrerR == "nonrendu") {
